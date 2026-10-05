@@ -6,7 +6,9 @@ Passive rich Link Cards and native YouTube embeds in SiYuan. Bookmark and suppor
 link/photo cards share one responsive layout and save their metadata in the document.
 Choose Link Card for a passive snapshot or Embed for a supported playable YouTube video.
 
-![Three current passive Link Cards in light theme](docs/screenshots/link-cards-light.png)
+![Three synthetic example Link Cards in light theme](docs/screenshots/link-cards-light.png)
+
+The passive-card screenshots use fictional example URLs and project-created text, illustrations and favicons.
 
 ## Features
 
@@ -17,7 +19,7 @@ Choose Link Card for a passive snapshot or Embed for a supported playable YouTub
 - English and German interface, URL prefill and native Undo/Redo.
 - Saved JSON remains readable when the plugin is disabled.
 
-![The same three passive Link Cards in dark theme](docs/screenshots/link-cards-dark.png)
+![The same three synthetic example Link Cards in dark theme](docs/screenshots/link-cards-dark.png)
 
 ## Creating Link Cards
 
@@ -125,5 +127,5 @@ The package is not intended for npm publication.
 
 ## License
 
-[MIT](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for the SiYuan build conventions
-and development dependencies.
+[MIT](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for the SiYuan build conventions,
+generated webpack runtime helpers and external development/host dependency.

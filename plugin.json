@@ -2,7 +2,7 @@
   "name": "siyuan-link-cards",
   "author": "blacknet76",
   "url": "https://github.com/blacknet76/siyuan-link-cards",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minAppVersion": "3.8.3",
   "icon": "icon.png",
   "backends": [
