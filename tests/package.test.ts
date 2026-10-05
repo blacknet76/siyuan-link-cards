@@ -191,3 +191,25 @@ test("missing approved screenshot fails the production build instead of silently
   assert.equal(stats.hasErrors(), true);
   assert.match(stats.toString({ all: false, errors: true }), /link-cards-light\.png/);
 });
+
+// CI/release opts in after building the real source; reuse the exact ZIP contract above.
+if (process.env.SLC_VALIDATE_PACKAGE === "1") {
+  test("built source package: ZIP integrity, exact runtime inventory, dist bytes and release version", async () => {
+    const files = zipFiles(await fs.readFile(path.join(root, "package.zip")));
+    assert.equal(files.size, 17);
+    assert.deepEqual([...files.keys()].sort(), inventory);
+    for (const [name, bytes] of files) {
+      assert.deepEqual(bytes, await fs.readFile(path.join(root, "dist", name)), name);
+    }
+    const source = await fs.readFile(path.join(root, "plugin.json"));
+    assert.deepEqual(files.get("plugin.json"), source);
+    const plugin = JSON.parse(source.toString());
+    const pkg = JSON.parse(await fs.readFile(path.join(root, "package.json"), "utf8"));
+    assert.equal(plugin.version, pkg.version);
+    if (process.env.SLC_RELEASE_TAG !== undefined) {
+      assert.match(process.env.SLC_RELEASE_TAG, /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/);
+      assert.equal(process.env.SLC_RELEASE_TAG, process.env.SLC_RELEASE_TAG.trim());
+      assert.equal(plugin.version, process.env.SLC_RELEASE_TAG.slice(1));
+    }
+  });
+}

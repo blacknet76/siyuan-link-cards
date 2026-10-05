@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Validate release version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          const tag = process.env.RELEASE_TAG;
+          assert.match(tag, /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/);
+          assert.equal(tag, tag.trim());
+          const version = tag.slice(1);
+          for (const file of ['package.json', 'plugin.json']) {
+            assert.equal(JSON.parse(fs.readFileSync(file, 'utf8')).version, version, `${file} version mismatch`);
+          }
+          NODE
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run format:check
+      - run: npm run build
+      - name: Validate built release package
+        run: node --experimental-strip-types --test tests/package.test.ts
+        env:
+          SLC_VALIDATE_PACKAGE: '1'
+          SLC_RELEASE_TAG: ${{ github.ref_name }}
+      - name: Create release with validated package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" package.zip \
+            --verify-tag \
+            --title "SiYuan Link Cards $RELEASE_TAG" \
+            --generate-notes
