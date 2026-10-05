@@ -1,0 +1,38 @@
+{
+  "lineWidth": 110,
+  "indentWidth": 2,
+  "newLineKind": "lf",
+  "includes": [
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "*.json",
+    "*.mjs",
+    "*.cjs",
+    "src/**/*.css",
+    "src/i18n/*.json",
+    "README*.md",
+    "docs/*.md",
+    "tasks/*.md",
+    "tools/**/*.mjs"
+  ],
+  "excludes": [
+    "package-lock.json",
+    "SIYUAN_LINK_CARDS_AUDIT.md"
+  ],
+  "typescript": {
+    "quoteStyle": "alwaysDouble",
+    "semiColons": "always"
+  },
+  "json": {
+    "indentWidth": 2
+  },
+  "markdown": {
+    "textWrap": "maintain"
+  },
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.96.0.wasm",
+    "https://plugins.dprint.dev/json-0.21.3.wasm",
+    "https://plugins.dprint.dev/markdown-0.21.1.wasm",
+    "https://plugins.dprint.dev/g-plane/malva-v0.15.3.wasm"
+  ]
+}

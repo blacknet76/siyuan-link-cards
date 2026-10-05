@@ -1,0 +1,17 @@
+node_modules/
+dist/
+dev/
+package.zip
+*.tsbuildinfo
+.DS_Store
+.slc-public-export.json
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.env
+.env.*
+
+# Local browser capture artifacts; only public-assets/screenshots is exportable.
+.playwright-cli/
+output/playwright/

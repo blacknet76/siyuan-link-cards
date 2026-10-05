@@ -1,0 +1,38 @@
+{
+  "name": "siyuan-link-cards",
+  "author": "blacknet76",
+  "url": "https://github.com/blacknet76/siyuan-link-cards",
+  "version": "0.1.0",
+  "minAppVersion": "3.8.3",
+  "icon": "icon.png",
+  "backends": [
+    "all"
+  ],
+  "frontends": [
+    "all"
+  ],
+  "disabledInPublish": false,
+  "displayName": {
+    "default": "Link Cards",
+    "de": "Link Cards",
+    "de-DE": "Link Cards"
+  },
+  "description": {
+    "default": "Rich link cards and native YouTube embeds for SiYuan.",
+    "de": "Link-Karten mit Vorschau und native YouTube-Einbettungen für SiYuan.",
+    "de-DE": "Link-Karten mit Vorschau und native YouTube-Einbettungen für SiYuan."
+  },
+  "readme": {
+    "default": "README.siyuan.md",
+    "de": "README.siyuan.de-DE.md",
+    "de-DE": "README.siyuan.de-DE.md"
+  },
+  "keywords": [
+    "link",
+    "bookmark",
+    "card",
+    "embed",
+    "oembed",
+    "youtube"
+  ]
+}
